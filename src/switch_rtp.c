@@ -251,6 +251,27 @@ struct switch_rtp_rfc2833_data {
 	uint8_t in_digit_queued;
 };
 
+typedef struct {
+	char *ice_user;
+	char *user_ice;
+	char *luser_ice;
+	char *pass;
+	char *rpass;
+	switch_sockaddr_t *addr;
+	uint32_t funny_stun;
+	switch_time_t next_run;
+	switch_core_media_ice_type_t type;
+	ice_t *ice_params;
+	ice_proto_t proto;
+	uint8_t sending;
+	uint8_t ready;
+	uint8_t rready;
+	uint8_t init;
+	int missed_count;
+	char last_sent_id[13];
+	switch_time_t last_ok;
+} switch_rtp_ice_t;
+
 struct switch_rtp;
 
 static void switch_rtp_dtls_init();
