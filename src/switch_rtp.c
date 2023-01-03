@@ -944,7 +944,6 @@ static void handle_ice(switch_rtp_t *rtp_session, switch_rtp_ice_t *ice, void *d
 	int cur_idx = -1;
 	icand_t *cand = NULL;
 	uint32_t priority = 0;
-	uint8_t use_cand = 0;
 
 	cur_idx = locate_candidate(ice, rtp_session->from_addr, &cand);
 	if (cand) {
@@ -1009,7 +1008,6 @@ static void handle_ice(switch_rtp_t *rtp_session, switch_rtp_ice_t *ice, void *d
 		case SWITCH_STUN_ATTR_USE_CAND:
 			{
 				ice->rready = 1;
-				use_cand = 1;
 			}
 			break;
 		case SWITCH_STUN_ATTR_ERROR_CODE:
@@ -1076,7 +1074,7 @@ static void handle_ice(switch_rtp_t *rtp_session, switch_rtp_ice_t *ice, void *d
 		xlen += 4 + switch_stun_attribute_padded_length(attr);
 	} while (xlen <= packet->header.length);
 
-	if (!cand && use_cand) {
+	if (!cand) {
 		const char *__host = NULL;
 		switch_port_t __port = 0;
 		char __buf[80] = "";
