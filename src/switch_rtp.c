@@ -1104,6 +1104,8 @@ static void handle_ice(switch_rtp_t *rtp_session, switch_rtp_ice_t *ice, void *d
 				ice->ice_params->cands[next_idx][cid].con_port,
 				rtp_session->pool
 		);
+		cand = &ice->ice_params->cands[next_idx][cid];
+
 		ice->ice_params->cand_idx[ice->proto]++;
 	}
 
